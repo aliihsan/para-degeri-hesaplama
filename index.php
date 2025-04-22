@@ -227,7 +227,7 @@ $currentYear = date('Y');
 </head>
 <body>
     <div class="container">
-        <h1>Para Değeri Hesaplama</h1>
+        <h1><a href=".">Para Değeri Hesaplama</a></h1>
         <form method="GET" action="">
             <div class="form-group">
                 <label for="amount">Para Miktarı (TL):</label>
