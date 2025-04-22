@@ -119,7 +119,7 @@ usort($queries, function($a, $b) {
                         </div>
                         <div class="query-content">
                             <?= $query['year'] ?> yılındaki 
-                            <span class="query-value"><?= number_format($query['amount'], 2, ',', '.') ?> TL</span>'nin 
+                            <span class="query-value"><?= number_format(round($query['amount']), 0, ',', '.') ?> TL</span>'nin 
                             bugünkü değeri: 
                             <span class="query-value"><?= number_format(round($query['present_value']), 0, ',', '.') ?> TL</span>
                             <br>
