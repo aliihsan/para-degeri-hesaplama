@@ -75,7 +75,7 @@ if (isset($_GET['amount']) && isset($_GET['year'])) {
                 // Yeni sorguyu ekle
                 $queries[] = $queryData;
                 
-                // Son 100 sorguyu tut
+                // Son 1000 sorguyu tut
                 if (count($queries) > 1000) {
                     $queries = array_slice($queries, -100);
                 }
