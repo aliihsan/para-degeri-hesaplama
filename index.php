@@ -56,6 +56,33 @@ if (isset($_GET['amount']) && isset($_GET['year'])) {
                     $amount,
                     $presentValue
                 );
+
+                // Sorguyu kaydet
+                $queryData = [
+                    'year' => $selectedYear,
+                    'amount' => $amount,
+                    'present_value' => $presentValue,
+                    'date' => date('Y-m-d H:i:s')
+                ];
+                
+                // queries.json dosyasını oku veya oluştur
+                $queriesFile = 'queries.json';
+                $queries = [];
+                if (file_exists($queriesFile)) {
+                    $queries = json_decode(file_get_contents($queriesFile), true) ?? [];
+                }
+                
+                // Yeni sorguyu ekle
+                $queries[] = $queryData;
+                
+                // Son 100 sorguyu tut
+                if (count($queries) > 1000) {
+                    $queries = array_slice($queries, -100);
+                }
+                
+                // Dosyaya kaydet
+                file_put_contents($queriesFile, json_encode($queries, JSON_PRETTY_PRINT));
+
             } else {
                  throw new Exception("$selectedYear yılı için hesaplama yapılamadı (geçmiş kur sıfır veya geçersiz).");
             }
@@ -215,6 +242,21 @@ $currentYear = date('Y');
             margin-top: 0.5rem;
         }
 
+        .queries-link {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .queries-link:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 640px) {
             .container {
                 padding: 1.5rem;
@@ -222,6 +264,9 @@ $currentYear = date('Y');
             .result-value {
                 font-size: 2rem;
             }
+        }
+        .clear {
+            clear: both;
         }
     </style>
 </head>
@@ -263,6 +308,9 @@ $currentYear = date('Y');
                 <?php endif; ?>
             </div>
         <?php endif; ?>
+        
+        <a href="queries.php" class="queries-link">Tüm Sorguları Görüntüle</a>
     </div>
+    <div class="clear"> </div>
 </body>
 </html>
