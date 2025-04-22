@@ -123,7 +123,7 @@ usort($queries, function($a, $b) {
                             bugünkü değeri: 
                             <span class="query-value"><?= number_format(round($query['present_value']), 0, ',', '.') ?> TL</span>
                             <br>
-                            <i><a href="/?amount=<?= $query['amoun'] ?>year=<?= $query['year'] ?>">Tekrar sorgula</a></a></i>
+                            <i><a href="/?amount=<?= $query['amount'] ?>&year=<?= $query['year'] ?>">Tekrar sorgula</a></a></i>
                         </div>
                     </li>
                 <?php endforeach; ?>
